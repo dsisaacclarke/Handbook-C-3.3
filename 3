@@ -1,0 +1,27 @@
+#include <iterator>
+
+template <typename InIter1, typename InIter2, typename OutIter>
+OutIter SetDifference(InIter1 start1, InIter1 end1, 
+                      InIter2 start2, InIter2 end2, 
+                      OutIter result_it) {
+    
+    InIter1 current1 = start1;
+    InIter2 current2 = start2;
+
+    while (current1 != end1) {
+      
+        while (current2 != end2 && *current2 < *current1) {
+            current2++;
+        }
+       
+        if (current2 == end2 || *current1 < *current2) {
+            *result_it = *current1;
+            result_it++;
+        } else if(current2 != end2) {
+             current2++;
+        }
+        current1++;
+    }
+    return result_it;
+}
+
