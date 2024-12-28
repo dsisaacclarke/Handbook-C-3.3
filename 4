@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <limits>
+
+int main() {
+    int n, k;
+    std::cin >> n >> k;
+
+    std::vector<int> arr1(n);
+    for (int i = 0; i < n; ++i) {
+        std::cin >> arr1[i];
+    }
+
+    for (int i = 0; i < k; ++i) {
+        int num;
+        std::cin >> num;
+
+        auto it = std::lower_bound(arr1.begin(), arr1.end(), num);
+
+        if (it == arr1.begin()) {
+            std::cout << *it << "\n";
+        } else if (it == arr1.end()) {
+          std::cout << *(it-1) << "\n";
+        } else {
+             int prev = *(it - 1);
+             int curr = *it;
+            
+             if (std::abs(num - prev) <= std::abs(num - curr)) {
+                std::cout << prev << "\n";
+            } else {
+                std::cout << curr << "\n";
+            }
+        }
+    }
+}
+
